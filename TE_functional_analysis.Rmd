@@ -114,6 +114,7 @@ write.csv(as.data.frame(res_KO_IC_RNA),file="KOcontrol_vs_IC_RNAseq.csv")
 
 # TE_calculations
 
+## WT 2-5A treated
 ```{r}
 
 TE_results <- list()
@@ -159,7 +160,7 @@ dev.off()
 p
 ```
 
-# Make Volcano plot
+## WT poly I:C treated
 ```{r}
 #This is for WT poly I:C treated
 TE_IC_countTable<-cbind(cdsfoot_table[,c(1,6,5,10)], cdsrna_table[,c(1,6,5,10)])
@@ -203,7 +204,7 @@ p
 
 ```
 
-
+## KO 2-5A treated
 ```{r}
 #This is for KO 2-5A treated
 TE_KO_countTable<-cbind(cdsfoot_table[,c(2,7,3,8)], cdsrna_table[,c(2,7,3,8)])
@@ -246,6 +247,7 @@ dev.off()
 p
 ```
 
+## KO poly I:C treated
 ```{r}
 #This is for KO poly I:C treated
 TE_IC_KO_countTable<-cbind(cdsfoot_table[,c(2,7,9,13)], cdsrna_table[,c(2,7,9,13)])
@@ -258,8 +260,8 @@ dds_TE_IC_KO$exp <- relevel(dds_TE_IC_KO$exp,ref="mRNA")
 dds_out_TE_IC_KO<-DESeq(dds_TE_IC_KO)
 res_TE_IC_KO<-results(dds_out_TE_IC_KO)
 rownames(res_TE_IC_KO)<-RNA_count$Geneid
-write.csv(as.data.frame(res_TE_IC_KO),file="TE_WT_controlvspolyIC.csv")
-TE_results[["TE_WT_controlvspolyIC"]] <- as.data.frame(res_TE_IC_KO)
+write.csv(as.data.frame(res_TE_IC_KO),file="TE_KO_control_polyIC.eps")
+TE_results[["TE_KO_control_polyIC"]] <- as.data.frame(res_TE_IC_KO)
 
 #vulcano plot
 setEPS()
@@ -380,11 +382,11 @@ dev.off()
 
 ```
 
-###########################################
-# Gene enrichment analysis
-###########################################
 
-# Define functions
+# Gene enrichment analysis
+
+
+## Define functions
 ```{r aux functions}
 
 # Load auxyliary functions
@@ -396,8 +398,7 @@ source(file = "./02_Gene_enrichment_functions.R")
 ```
 
 
-MSigDBs can be downloaded from R with the function msigdbr (see below). 
-
+## Enrichment analysis with MSigDB
 ```{r enrichment analysis with MSigDB}
 
 suppressMessages(library("org.Hs.eg.db"))
@@ -520,7 +521,8 @@ for (i in names(TE_results)){
 ```
 
 
-
-
-
+# R session information
+```{r}
+sessionInfo()
+```
 
