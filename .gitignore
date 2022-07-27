@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.DS_Store
+ClusterProfiler/
+*.csv
+PAPER/
+Plots/
+TE/
+*.eps
+data/
